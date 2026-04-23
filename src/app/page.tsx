@@ -214,10 +214,38 @@ function ReasonCard({ title, text }: { title: string; text: string }) {
 export default function Home() {
   const stepItems = experiences.slice(0, 3);
   const year = new Date().getFullYear();
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://portfolio-pierre-six.vercel.app";
+
+  const personJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: "Pierre Claver Sidibe",
+    url: siteUrl,
+    jobTitle: "Ingenieur de la Statistique",
+    description:
+      "Data analyst, formateur et specialiste en visualisation de donnees avec plus de 5 ans d experience.",
+    email: "mailto:sidibepierreclaver@outlook.com",
+    telephone: "+22370838368",
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Kati",
+      addressCountry: "ML",
+    },
+    sameAs: [
+      "https://www.youtube.com/@FinalDataViz",
+      "https://www.facebook.com/volontedeDieu0",
+      "https://www.youtube.com/@volont%C3%A9_de_dieu",
+    ],
+  };
 
   return (
-    <div className="min-h-screen overflow-x-hidden bg-[#133a90]">
-      <main className="w-full">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+      />
+      <div className="min-h-screen overflow-x-hidden bg-[#133a90]">
+        <main className="w-full">
         <section
           id="profil"
           className="relative overflow-hidden bg-[linear-gradient(140deg,#0c2458_0%,#133a90_46%,#1f56c2_100%)] pb-24 pt-6 text-white shadow-[0_14px_32px_-20px_rgba(1,10,12,0.75)] sm:pt-8"
@@ -536,10 +564,10 @@ export default function Home() {
             </div>
           </div>
         </footer>
-      </main>
-    </div>
+        </main>
+      </div>
+    </>
   );
 }
-
 
 
